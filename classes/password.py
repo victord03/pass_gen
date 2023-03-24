@@ -25,25 +25,27 @@ class Password:
 
         next_value = None
 
-        for i in range(1, generated_password_length + 1):
+        for i in range(0, generated_password_length):
 
-            keys_in_dict = list(cases_copy.keys())
+            list_of_dict_keys = list(cases_copy.keys())
 
-            roll_next_type = randint(0, len(keys_in_dict) - 1)
+            roll_for_key = randint(0, len(list_of_dict_keys) - 1)
 
-            key_rolled = list(cases_copy.keys())[roll_next_type]
+            key_rolled = list_of_dict_keys[roll_for_key]
 
-            roll_item = randint(0, len(cases_copy[key_rolled]) - 1)
-            next_value = cases_copy[key_rolled][roll_item]
+            rolled_key_values = cases_copy[key_rolled]
+            roll_for_value_index = randint(0, len(rolled_key_values) - 1)
+
+            selected_value = cases_copy[key_rolled][roll_for_value_index]
 
             if key_rolled in ("symbols", "numbers"):
                 cases_copy = cases.copy()
-            elif key_rolled == "lc":
-                cases_copy = cases_copy.pop("lc")
-            elif key_rolled == "uc":
-                cases_copy = cases_copy.pop("uc")
+            elif key_rolled == "lower_case":
+                cases_copy["lower_case"].pop(roll_for_value_index)
+            elif key_rolled == "upper_case":
+                cases_copy["upper_case"].pop(roll_for_value_index)
 
-            generated_password.append(next_value)
+            generated_password.append(selected_value)
 
         self.password = "".join(generated_password)
 
