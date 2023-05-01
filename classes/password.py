@@ -23,8 +23,6 @@ class Password:
 
         cases_copy = cases.copy()
 
-        next_value = None
-
         for i in range(0, generated_password_length):
 
             list_of_dict_keys = list(cases_copy.keys())
